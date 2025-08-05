@@ -36,8 +36,3 @@ jobs:
         run: |
           JAR_PATH=$(find target -name "*.jar" | grep -v "original" | head -n 1)
           echo "Archivo .jar generado: $JAR_PATH"
-
-      - name: Ejecutar .jar generado (si tiene clase Main)
-        run: |
-          JAR_PATH=$(find target -name "*.jar" | grep -v "original" | head -n 1)
-          java -jar "$JAR_PATH"
