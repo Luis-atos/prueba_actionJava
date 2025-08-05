@@ -30,7 +30,7 @@ jobs:
           mvn -version
 
       - name: Compilar el proyecto con Maven
-        run: mvn clean install -f pom.xml
+        run: mvn -f hola-mundo/pom.xml clean install
 
       - name: Mostrar ubicación del .jar generado
         run: |
