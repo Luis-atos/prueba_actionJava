@@ -1,0 +1,30 @@
+on:
+ push:
+  branches:
+   - main
+jobs:
+ modulo3_P2
+  run-on:ubuntu-latest
+  steps:
+   - name: checkout project
+     uses: actions/checkout@v4
+   - name: java-maven version
+     run: |
+       JAVA_VERSION = $(java --version)
+       MAVEN_VERSION = $(mvn -version)
+   - name: salida-versiones
+     run: |
+      echo "Version java $JAVA_VERSION"
+      echo "Version maven $MAVEN_VERSION"
+   - name: compilacion
+     run: |
+       mvn clean install -f pom.xml
+   - name: Mostrar ubicación del .jar generado
+     run: |
+       JAR_PATH=$(find target -name "*.jar" | grep -v "original" | head -n 1)
+       echo "Archivo .jar generado: $JAR_PATH"
+
+   - name: Ejecutar .jar generado (si tiene main)
+     run: |
+       JAR_PATH=$(find target -name "*.jar" | grep -v "original" | head -n 1)
+       java -jar "$JAR_PATH"
